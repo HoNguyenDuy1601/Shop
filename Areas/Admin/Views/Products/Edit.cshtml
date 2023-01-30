@@ -1,0 +1,69 @@
+﻿@model Shop.Models.Products
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Edit Product</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UrlHinhAnh" class="control-label"></label>
+                <img class="img-fluid flex-shrink-0 mb-4" src="@Html.DisplayFor(Model => Model.UrlHinhAnh)" style="height: 75px" alt="">
+                <input asp-for="UrlHinhAnh" class="form-control hidden"/>
+                <input type="file" name="FileAnh" class="form-control" />
+                <span asp-validation-for="UrlHinhAnh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idProduct" class="control-label"></label>
+                <select class="form-control" name="idProduct">
+                    @foreach (var type in ViewBag.Types)
+                    {
+                        @if (type.Id == Model.idProduct)
+                        {
+                            <option value="@type.Id" selected>@type.Type</option>
+                        }
+                        else
+                        {
+                            <option value="@type.Id">@type.Type</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="idProduct" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

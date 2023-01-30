@@ -1,0 +1,43 @@
+﻿@model Shop.Models.Posts
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Post Detail</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="container my-5 col-lg-10">
+    <h1 class="block mx-auto my-2">
+        @Html.Raw(Model.Title)
+    </h1>
+    <h6 class="my-lg-4 font-weight-lighter">
+        @Html.Raw(Model.Date)
+    </h6>
+    <div>
+        @Html.Raw(Model.PostBodyContent)
+    </div>
+    <h5 class="font-weight-bold">
+        @Html.Raw(Model.CreatedBy)
+    </h5>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+        <br />
+        <br />
+    </div>
+</div>
+
+<style>
+    img {
+        width: 100%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+    }
+</style>

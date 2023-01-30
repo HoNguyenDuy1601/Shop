@@ -1,0 +1,94 @@
+﻿@model Shop.Models.Posts
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<br />
+<div class="container my-5">
+    <h2>Edit Post</h2>
+    <hr />
+    <div class="row">
+        <div class="col-lg-8">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Date" class="control-label"></label>
+                    <input asp-for="Date" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatedBy" class="control-label">Created By</label>
+                    <input asp-for="CreatedBy" class="form-control" />
+                    <span asp-validation-for="CreatedBy" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PostBodyContent" class="control-label">Post Content</label>
+                    <textarea class="form-control" name="PostBodyContent" id="inputContent">@Model.PostBodyContent</textarea>
+                    <span asp-validation-for="PostBodyContent" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Image" class="control-label"></label>
+                    <img class="img-fluid flex-shrink-0 mb-4" src="@Html.DisplayFor(Model => Model.Image)" style="height: 75px" alt="">
+                    <input asp-for="Image" class="form-control hidden"/>
+                    <input type="file" name="FileAnh" class="form-control" value="@Model.Image"/>
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Show" /> @Html.DisplayNameFor(model => model.Show)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OrderNumber" class="control-label">Order Number</label>
+                    <input asp-for="OrderNumber" class="form-control" />
+                    <span asp-validation-for="OrderNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="idPost" class="control-label">Type Post Id</label>
+                    <select class="form-control" name="idPost">
+                        @foreach (var type in ViewBag.Types)
+                        {
+                            @if (type.Id == Model.idPost)
+                            {
+                                <option value="@type.Id" selected>@type.Type</option>
+                            }
+                            else
+                            {
+                                <option value="@type.Id">@type.Type</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="idPost" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+</div>
+
+@section JsScript{
+    <script>
+        CKEDITOR.replace("inputContent")
+    </script>
+}
